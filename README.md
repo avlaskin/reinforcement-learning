@@ -13,12 +13,13 @@ mkdir env
 cd env
 virtualenv .
 source bin\activate
-cp ../requirements.txt ./
-pip -r requirements.txt
-
+cp ../docker/requirements.txt ./
+pip install -r requirements.txt
 ```
 
 ## Docker
+
+Here we use technic to speedup docker rebuild. Run ``build.sh``` only once to make a new container and ```runs.sh``` as many times as you change the app.
 
 ## Bandit
 
