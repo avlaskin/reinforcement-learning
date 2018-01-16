@@ -1,0 +1,12 @@
+numpy
+pillow
+matplotlib
+itermplot
+keras==2.0.6
+tensorflow
+coremltools
+enum34
+h5py
+pydot
+graphviz
+gym
