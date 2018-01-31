@@ -140,8 +140,8 @@ def test_td0_sarsa(alpha=0.1, gamma = 0.9, eps = 0.1):
     print("Values:")
     print_values(V, game)
 
-def test_td0_q_learning(alpha=0.1, gamma = 0.9, eps = 0.5, delta_t = 10e-3, learning_decay=0.001):
-    game = NegativeGrid()#StandardGrid()
+def test_td0_q_learning(itterations=1000,alpha=0.1, gamma = 0.9, eps = 0.5, delta_t = 10e-3, learning_decay=0.0001):
+    game = NegativeGrid(-0.2)#StandardGrid()
     print_values(game.rewards, game)
     allActions=(GridWorldMove.up, GridWorldMove.down, GridWorldMove.right, GridWorldMove.left)
     states = game.allStates()
@@ -158,7 +158,7 @@ def test_td0_q_learning(alpha=0.1, gamma = 0.9, eps = 0.5, delta_t = 10e-3, lear
     t = 1.0
     deltas = []
 
-    for j in xrange(100000):
+    for j in xrange(itterations):
         ## Learning rate change
         if j % 100 == 0:
             t += delta_t
@@ -208,4 +208,4 @@ def test_td0_q_learning(alpha=0.1, gamma = 0.9, eps = 0.5, delta_t = 10e-3, lear
 if __name__ == '__main__':
     ##test_td0_method()
     ##test_td0_sarsa()
-    test_td0_q_learning()
+    test_td0_q_learning(20000)
