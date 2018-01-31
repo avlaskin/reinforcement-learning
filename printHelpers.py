@@ -30,5 +30,8 @@ def print_policy_beautifly(P, g):
     for j in range(g.width):
       a = P.get((j,i), [0 ,0, 0, 0])
       y = np.argmax(a)
-      print(" %s | " % beauty[y] , end="")
+      if a[y] == 0:
+          print(" x | " , end="")
+      else:
+          print(" %s | " % beauty[y] , end="")
     print("")
