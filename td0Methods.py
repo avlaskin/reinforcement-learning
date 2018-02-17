@@ -207,5 +207,5 @@ def test_td0_q_learning(itterations=1000,alpha=0.1, gamma = 0.9, eps = 0.5, delt
 
 if __name__ == '__main__':
     ##test_td0_method()
-    ##test_td0_sarsa()
-    test_td0_q_learning(20000)
+    test_td0_sarsa()
+    ##test_td0_q_learning(20000)
