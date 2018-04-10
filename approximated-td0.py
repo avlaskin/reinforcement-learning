@@ -29,7 +29,7 @@ def eps_random_action(a, eps=0.1, allActions=(GridWorldMove.up, GridWorldMove.do
         return np.random.choice(allActions)
 
 class LinearSarsaState:
-    def __init__(self, indexes = 25):
+    def __init__(self, indexes = 17):
         self.weights = np.random.randn(indexes) / np.sqrt(indexes)
 
     def featureMapper(self, s, a):
@@ -38,28 +38,28 @@ class LinearSarsaState:
         s[0] - 1 if a == GridWorldMove.up else 0,
         s[1] - 1.5 if a == GridWorldMove.up else 0,
         (s[0]*s[1] - 3)/3 if a == GridWorldMove.up else 0,
-        (s[0]*s[0] - 2)/2 if a == GridWorldMove.up else 0,
-        (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.up else 0,
+        # (s[0]*s[0] - 2)/2 if a == GridWorldMove.up else 0,
+        # (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.up else 0,
         1                      if a == GridWorldMove.up else 0,
 
         s[0] - 1 if a == GridWorldMove.down else 0,
         s[1] - 1.5 if a == GridWorldMove.down else 0,
         (s[0]*s[1] - 3)/3 if a == GridWorldMove.down else 0,
-        (s[0]*s[0] - 2)/2 if a == GridWorldMove.down else 0,
-        (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.down else 0,
+        # (s[0]*s[0] - 2)/2 if a == GridWorldMove.down else 0,
+        # (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.down else 0,
         1                      if a == GridWorldMove.down else 0,
 
         s[0] - 1 if a == GridWorldMove.right else 0,
         s[1] - 1.5 if a == GridWorldMove.right else 0,
         (s[0]*s[1] - 3)/3 if a == GridWorldMove.right else 0,
-        (s[0]*s[0] - 2)/2 if a == GridWorldMove.right else 0,
-        (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.right else 0,
+        # (s[0]*s[0] - 2)/2 if a == GridWorldMove.right else 0,
+        # (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.right else 0,
         1                      if a == GridWorldMove.right else 0,
         s[0] - 1 if a == GridWorldMove.left else 0,
         s[1] - 1.5 if a == GridWorldMove.left else 0,
         (s[0]*s[1] - 3)/3 if a == GridWorldMove.left else 0,
-        (s[0]*s[0] - 2)/2 if a == GridWorldMove.left else 0,
-        (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.left else 0,
+        # (s[0]*s[0] - 2)/2 if a == GridWorldMove.left else 0,
+        # (s[1]*s[1] - 4.5)/4.5 if a == GridWorldMove.left else 0,
         1                      if a == GridWorldMove.left else 0
         ]
         return np.array(features)
@@ -77,8 +77,8 @@ class LinearSarsaState:
         Qs[a] = q_sa
       return Qs
 
-def test_td0_sarsa_approximated(alpha=0.1, gamma = 0.9, eps = 0.1, itterations = 20000):
-    game = NegativeGrid(-0.5)
+def test_td0_sarsa_approximated(alpha=0.1, gamma = 0.9, eps = 0.1, itterations = 50000):
+    game = StandardGrid()#NegativeGrid(-0.1)
     print_values(game.rewards, game)
     allActions=(GridWorldMove.up, GridWorldMove.down, GridWorldMove.right, GridWorldMove.left)
     states = game.allStates()
@@ -100,7 +100,7 @@ def test_td0_sarsa_approximated(alpha=0.1, gamma = 0.9, eps = 0.1, itterations =
         Qs = model.getQs(state)
         action = max_dict(Qs)[0]
         action = eps_random_action(action, eps=0.5/t)
-        alpha = alpha / 1.0001
+        alpha = alpha / 1.00005
         while not game_over:
             r = game.move(action)
             state2 = game.position
