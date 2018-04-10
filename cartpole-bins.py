@@ -14,7 +14,7 @@ class BinsTransformer:
             self.stateBins.append(np.linspace(self.mins[i], self.maxes[i], self.bins[i]))
 
     def state_to_int(self, state):
-    """ Takes cartpole state and returns transformed features as Int."""
+        """ Takes cartpole state and returns transformed features as Int."""
         nidx = []
         #value -> number
         for i in range(4):
@@ -101,9 +101,9 @@ class Trainer:
         for j in range(self.itterations):
             r = self.play_episode(self.q_agent)
             rewards.append(r)
-            self.eps = 1.0 / (j+1)*(j+1)
+            #self.eps = 1.0 / (j+1)*(j+1)
             #self.eps = 1.0 / (j+1)
-            #self.eps = 1.0 / np.sqrt(j+1)
+            self.eps = 1.0 / np.sqrt(np.sqrt(j+1))
             if j % 500 == 1:
                 print("AV reward: {} Iter: {}".format(np.mean(rewards[-500:]), j))
                 m_rewards.append(np.mean(rewards[-500:]))
