@@ -32,7 +32,9 @@ class QLearningAgent:
     """
     def __init__(self, env):
         self.q_zise = [10000, 2]
-        self.Q = np.random.uniform(low=-1,high=1,size=self.q_zise)
+        # Initial itialisation with zeros is much better for initial convergence.
+        self.Q = np.zeros(self.q_zise)
+        #np.random.uniform(low=-1,high=1,size=self.q_zise)
         self.transformer = BinsTransformer()
         self.alpha = 0.001
         self.env = env
@@ -103,7 +105,7 @@ class Trainer:
             rewards.append(r)
             #self.eps = 1.0 / (j+1)*(j+1)
             #self.eps = 1.0 / (j+1)
-            self.eps = 1.0 / np.sqrt(np.sqrt(j+1))
+            self.eps = 1.0 / np.sqrt(j+1)
             if j % 500 == 1:
                 print("AV reward: {} Iter: {}".format(np.mean(rewards[-500:]), j))
                 m_rewards.append(np.mean(rewards[-500:]))
