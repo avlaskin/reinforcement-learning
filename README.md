@@ -28,3 +28,11 @@ Exploration/Exploitation dilema.
 ## Tic Toc Toe
 
 Simple Time Difference method for this game.
+
+## Cart Pole
+
+*Random* is a linear solution approximation where we are trying to find a vector such as when  multiplied by state to give us a scalar value that can be used as decisiom boundary. More than zero - go right, less - go left. This solution is certainly full of assumtions but in practice still gives us good solution.
+
+*Bins* is a table Q-learning method that converts state space into 10000 bins table. That allows us to use general table methods like Q-leaning to solve the cartpole. Distretisising the state space is a very useful technic and certainly can be applied to many different problems.
+
+*DQN* is the early days attempt to solve cartpole problem using deep Q-Learning with neural network implemented in Keras. 
